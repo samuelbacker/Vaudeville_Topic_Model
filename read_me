@@ -1,0 +1,17 @@
+Vaudeville Regex + Topic Model Readme 
+
+This project aims to take vaudeville touring data form Variety Magazine using a regular expression, organize this data, and then analyze it using topic modeling. 
+
+This task is broken down into three programs: 
+
+The first “Vaudeville_Regex_Defense_2.2.” reads through text files and splits them into chunks based on a regular expression searching through a list of town names. 
+
+Each of these chunks is then analyzed using a regular expression built to identify touring records. The regular expression used is intentionally capacious—incorrect results are later eliminated based on Vaudeville naming conventions. 
+
+The program than produces a json file with the following characteristics – date (of the paper) town (town used to chunk) (venue) and (performers) 
+
+The second program (Vaudeville_Dictionary_List_Maker_For_Topic_Modeling) takes this list, and transforms it into a flat ontology of dictionaries, each of which corresponds to a venue with a list of performers. – 
+
+Dictionary key structure = “date,” “city_name,” “venue_name,” “artist”. The final is a list of performers. 
+
+The third program (Touring_Topic_Model_1.py) takes this list, and does topic modelling on them using an LDA model, using every venue/performance as a date, and every performer as a word. 
