@@ -16,7 +16,6 @@ import re
 from gensim.test.utils import datapath
 import logging
 from pprint import pprint
-import pickle
 import json 
 
 parser = argparse.ArgumentParser()
