@@ -7,10 +7,10 @@ import uuid
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--input", dest="input", default ="Regex_Defense_5_Vaudeville_Dcitionary_One_Issue_Flat_List.json")
-#parser.add_argument("--output", dest="output", default="my_rdf_graph")
+parser.add_argument("--output", dest="output", default="my_rdf_graph")
 args = parser.parse_args()
 input_file = args.input
-#output_file = args.output
+output_file = args.output
 
 CDH = Namespace("https://cdh.jhu.edu/")
 
@@ -35,14 +35,17 @@ with open(input_file, 'r') as f:
         #print(new_performer_uri)
         g.add((new_performer_uri, RDF.type, SDO.Person))
         g.add((new_performer_uri, SDO.name, performer_name))
-        g.add((new_performer_uri, SDO.performer, venue))
+        #g.add((new_performer_uri, SDO.performer, venue))
+        g.add((venue, RDF.type, SDO.EventVenue))
+        g.add((venue, SDO.containedInPlace, city))
         performance = BNode()
     #adding the definitions around the event/bill
+        g.add((new_performer_uri, SDO.performer, performance))
         g.add((performance, RDF.type, SDO.MusicEvent ))
         g.add((performance, SDO.startDate, date))
         g.add((performance, SDO.location, venue))
     #adding the definitions around the venue
-        g.add((venue, RDF.type, SDO.EventVenue))
-        g.add((venue, SDO.containedInPlace, city))
+        #g.add((venue, RDF.type, SDO.Place))
+        #g.add((venue, SDO.containedInPlace, city))
     print(g.serialize(format='turtle'))
-    #g.serialize(destination= output_file, format='turtle')
+    g.serialize(destination= output_file, format='turtle')
